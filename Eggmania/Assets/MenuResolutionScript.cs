@@ -3,20 +3,27 @@ using System.Collections;
 
 public class MenuResolutionScript : MonoBehaviour {
     public string SceneName = "MainMenu";
-    public GameObject Background1;
-    public GameObject Background2;
-    private GameObject Background3;
+    public GameObject MainMenuBackGround;
+    public GameObject PlayBackground;
+    public GameObject Grass;
     public bool IsActive = true;
     private GameObject MainCamera;
-
+    System.Collections.Generic.List<GameObject> ToResizeGameObjects;
+    void SetLocalScale(float x, float y, float z)
+    {
+        foreach (var item in ToResizeGameObjects)
+        {
+            item.transform.localScale = new Vector3(x, y, z);
+        }
+    }
     void Start()
     {
+        ToResizeGameObjects = new System.Collections.Generic.List<GameObject>();
+        ToResizeGameObjects.AddRange(new[] { MainMenuBackGround, PlayBackground, Grass });
         MainCamera = GameObject.Find("Main Camera");
     }
     void OnGUI()
     {
-        //Background2 = Background1;
-        Background3 = Background1;
         if (IsActive)
         {
             var resolution = string.Empty;
@@ -30,52 +37,35 @@ public class MenuResolutionScript : MonoBehaviour {
             }
             if (resolution == "1.70" || resolution == "1.7")
             {
-                Background1.transform.localScale = new Vector3(1.44f, 1.27f, 1f);
-                Background2.transform.localScale = new Vector3(1.44f, 1.27f, 1f);
-                Background3.transform.localScale = new Vector3(1.44f, 1.27f, 1f);
+                SetLocalScale(1.44f, 1.27f, 1f);
             }
             else if (resolution == "1.78")
             {
-                Background1.transform.localScale = new Vector3(1.51f, 1.27f, 1f);
-                Background2.transform.localScale = new Vector3(1.51f, 1.27f, 1f);
-                Background3.transform.localScale = new Vector3(1.51f, 1.27f, 1f);
+                SetLocalScale(1.51f, 1.27f, 1f);
             }
             else if (resolution == "1.77")
             {
-                Background1.transform.localScale = new Vector3(1.51f, 1.27f, 1f);
-                Background2.transform.localScale = new Vector3(1.51f, 1.27f, 1f);
-                Background3.transform.localScale = new Vector3(1.51f, 1.27f, 1f);
+                SetLocalScale(1.51f, 1.27f, 1f);
             }
             else if (resolution == "1.66")
             {
-                Background1.transform.localScale = new Vector3(1.41f, 1.27f, 1f);
-                Background2.transform.localScale = new Vector3(1.41f, 1.27f, 1f);
-                Background3.transform.localScale = new Vector3(1.41f, 1.27f, 1f);
+                SetLocalScale(1.41f, 1.27f, 1f);
             }
             else if (resolution == "1.5" || resolution == "1.50")
             {
-                Background1.transform.localScale = new Vector3(1.27f, 1.27f, 1f);
-                Background2.transform.localScale = new Vector3(1.27f, 1.27f, 1f);
-                Background3.transform.localScale = new Vector3(1.27f, 1.27f, 1f);
+                SetLocalScale(1.27f, 1.27f, 1f);
             }
             else if (resolution == "1.60" || resolution == "1.6" || resolution == "1.59")
             {
-                
-                Background1.transform.localScale = new Vector3(1.36f, 1.27f, 1f);
-                Background2.transform.localScale = new Vector3(1.36f, 1.27f, 1f);
-                Background3.transform.localScale = new Vector3(1.36f, 1.27f, 1f);
+                SetLocalScale(1.36f, 1.27f, 1f);
             }
             else if (resolution == "1.25")
             {
-                Background1.transform.localScale = new Vector3(1.06f, 1.27f, 1f);
-                Background2.transform.localScale = new Vector3(1.06f, 1.27f, 1f);
-                Background3.transform.localScale = new Vector3(1.06f, 1.27f, 1f);
+                SetLocalScale(1.06f, 1.27f, 1f);
             }
             else if (resolution == "1.33")
             {
-                Background1.transform.localScale = new Vector3(1.13f, 1.27f, 1f);
-                Background2.transform.localScale = new Vector3(1.13f, 1.27f, 1f);
-                Background3.transform.localScale = new Vector3(1.13f, 1.27f, 1f);
+                SetLocalScale(1.13f, 1.27f, 1f);
             }
         }
     }
