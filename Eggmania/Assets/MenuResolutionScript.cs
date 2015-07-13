@@ -29,6 +29,21 @@ public class MenuResolutionScript : MonoBehaviour {
         ToResizeGameObjects.AddRange(new[] { MainMenuBackGround, PlayBackground, Grass });
         MainCamera = GameObject.Find("Main Camera");
     }
+    void SetChickensPositions()
+    {
+        var leftDownEggBrokenPos = GameObject.Find("LeftDownEggBroken").transform.position;
+        var leftWidth = leftDownEggBrokenPos.x - Camera.main.ScreenToWorldPoint(this.transform.localScale).x;
+        var rightDownEggBrokenPos = GameObject.Find("RightDownEggBroken").transform.position;
+        var space = leftWidth / 4.5f;
+        for (int i = 1; i <= 4; i++)
+        {
+            var item = GameObject.Find("SmallChickenLeft" + i);
+            item.transform.position = new Vector3(leftDownEggBrokenPos.x - space * i, item.transform.position.y, item.transform.position.z);
+            var item2 = GameObject.Find("SmallChickenRight" + i);
+            item2.transform.position = new Vector3(rightDownEggBrokenPos.x + space * i, item2.transform.position.y, item2.transform.position.z);
+        }
+
+    }
     void OnGUI()
     {
         if (IsActive)
@@ -80,6 +95,7 @@ public class MenuResolutionScript : MonoBehaviour {
             {
                 SetLocalScale(1.13f, 1.27f, 1f);
             }
+            SetChickensPositions();
         }
     }
     void Update()
@@ -92,5 +108,6 @@ public class MenuResolutionScript : MonoBehaviour {
         {
             MainCamera.GetComponent<Camera>().orthographicSize = 6.86f;
         }
+
     }
 }
