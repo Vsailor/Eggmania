@@ -55,6 +55,7 @@ public class MenuResolutionScript : MonoBehaviour {
             else if (resolution == "1.77")
             {
                 SetLocalScale(1.51f, 1.27f, 1f);
+                SetChickenBackgrounds(1.28f, 1f, 1f);
             }
             else if (resolution == "1.66")
             {

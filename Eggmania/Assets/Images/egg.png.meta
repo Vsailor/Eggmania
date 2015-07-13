@@ -1,9 +1,15 @@
 fileFormatVersion: 2
 guid: 604f998268f6ccb4caa19defcd92b638
-timeCreated: 1436736067
+timeCreated: 1436797946
 licenseType: Pro
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: egg_0
+    21300002: egg_1
+    21300004: egg_2
+    21300006: egg_3
+    21300008: egg_4
+    21300010: egg_5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -30,14 +36,14 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -45,10 +51,70 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
-  textureType: 8
+  textureType: 5
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: egg_0
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 44
+        width: 68
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: egg_1
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 44
+        width: 72
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: egg_2
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 44
+        width: 79
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: egg_3
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 44
+        width: 71
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: egg_4
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 44
+        width: 79
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: egg_5
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 44
+        width: 75
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 
