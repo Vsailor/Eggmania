@@ -7,8 +7,6 @@ public class GrassScript : MonoBehaviour {
 
     void Init()
     {
-        print(1);
-
 
     }
 	

@@ -6,6 +6,8 @@ public class MenuResolutionScript : MonoBehaviour {
     public GameObject MainMenuBackGround;
     public GameObject PlayBackground;
     public GameObject Grass;
+    public GameObject Bg2;
+    public GameObject Bg3;
     public bool IsActive = true;
     private GameObject MainCamera;
     System.Collections.Generic.List<GameObject> ToResizeGameObjects;
@@ -15,6 +17,11 @@ public class MenuResolutionScript : MonoBehaviour {
         {
             item.transform.localScale = new Vector3(x, y, z);
         }
+    }
+    void SetChickenBackgrounds(float x, float y, float z)
+    {
+        Bg2.transform.localScale = new Vector3(x, y, z);
+        Bg3.transform.localScale = new Vector3(x, y, z);
     }
     void Start()
     {
@@ -38,10 +45,12 @@ public class MenuResolutionScript : MonoBehaviour {
             if (resolution == "1.70" || resolution == "1.7")
             {
                 SetLocalScale(1.44f, 1.27f, 1f);
+                SetChickenBackgrounds(1.24f, 1f, 1f);
             }
             else if (resolution == "1.78")
             {
                 SetLocalScale(1.51f, 1.27f, 1f);
+                SetChickenBackgrounds(1.28f, 1f, 1f);
             }
             else if (resolution == "1.77")
             {
@@ -50,14 +59,17 @@ public class MenuResolutionScript : MonoBehaviour {
             else if (resolution == "1.66")
             {
                 SetLocalScale(1.41f, 1.27f, 1f);
+                SetChickenBackgrounds(1.21f, 1f, 1f);
             }
             else if (resolution == "1.5" || resolution == "1.50")
             {
                 SetLocalScale(1.27f, 1.27f, 1f);
+                SetChickenBackgrounds(1.1f, 1f, 1f);
             }
             else if (resolution == "1.60" || resolution == "1.6" || resolution == "1.59")
             {
                 SetLocalScale(1.36f, 1.27f, 1f);
+                SetChickenBackgrounds(1.17f, 1f, 1f);
             }
             else if (resolution == "1.25")
             {
