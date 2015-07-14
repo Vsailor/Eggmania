@@ -10,13 +10,15 @@ class Egg
     public Egg(string name)
     {
         Name = name;
-        Number = 1;
+        Number = 0;
         EggObject = GameObject.Find(name + Number);
-        EggObject.GetComponent<SpriteRenderer>().enabled = true;
     }
     public void Move()
     {
-        EggObject.GetComponent<SpriteRenderer>().enabled = false;
+        if (Number != 0)
+        {
+            EggObject.GetComponent<SpriteRenderer>().enabled = false;
+        }
         Number++;
         if (Number == 7)
         {
@@ -77,42 +79,40 @@ public class EggsScript : MonoBehaviour
     }
     void MoveEgg()
     {
-        if (Rand.Next(1,3) == 2)
+        if (Step%Rand.Next(1,10) == 0)
         {
             var rand = Rand.Next(1, 5);
             if (rand == 1)
             {
                 Eggs.Add(new Egg("LeftDownEgg"));
-                return;
             }
             if (rand == 2)
             {
                 Eggs.Add(new Egg("RightDownEgg"));
-                return;
             }
             if (rand == 3)
             {
                 Eggs.Add(new Egg("LeftUpEgg"));
-                return;
             }
             if (rand == 4)
             {
                 Eggs.Add(new Egg("RightUpEgg"));
-                return;
             }
         }
-        foreach (var item in Eggs)
+        for (int i = 0; i < Eggs.Count; i++)
         {
-            if (item.ToDestroy)
+            if (Eggs[i].ToDestroy)
             {
-                Eggs.Remove(item);
+                Eggs.RemoveAt(i);
             }
         }
         foreach (var item in Eggs)
         {
             item.Move();
         }
+    
     }
+    public int Step = 0;
     public float OldTime;
     public float Timer = 0;
     public float StartPlayingTime;
@@ -133,9 +133,10 @@ public class EggsScript : MonoBehaviour
             }
        
             Timer = Time.timeSinceLevelLoad - StartPlayingTime;
-            if (Timer - OldTime > 0.3)
+            if (Timer - OldTime > 1)
             {
                 MoveEgg();
+                Step++;
                 OldTime = Timer;
             }
         }
