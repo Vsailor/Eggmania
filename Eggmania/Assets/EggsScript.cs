@@ -98,7 +98,7 @@ public class EggsScript : MonoBehaviour
     public float Timer = 0;
     public float StartPlayingTime;
     private bool Inited = false;
-    private float Interval = 1.3f;
+    private float Interval;
     private int MaxEggsOnScreen = 3;
     private System.Collections.Generic.List<Egg> Eggs;
     private System.Random Rand;
@@ -133,7 +133,7 @@ public class EggsScript : MonoBehaviour
                 Eggs.RemoveAt(i);
             }
         }
-        
+        bool playSound = false;
         for (int i=0; i<Eggs.Count; i++)
         { 
             if (Eggs[i].Number == 5)
@@ -164,14 +164,25 @@ public class EggsScript : MonoBehaviour
                     MainCamera.GetComponent<MenuResolutionScript>().SceneName = "EndScreen";
                     // End
                 }
+                else
+                {
+                    if (Eggs[i].Number <5 && (Eggs[i].Name[0] == 'L' || Eggs[i].Name[0] == 'R'))
+                    {
+                        playSound = true;
+                    }
+                }
                 
             }
         }
-
+        if (playSound)
+        {
+            GetComponent<AudioSource>().Play();
+        }
     }
 
     private void Init()
     {
+        Interval = 1.3f;
         if (Eggs != null)
         {
             foreach (var item in Eggs)

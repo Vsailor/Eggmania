@@ -12,6 +12,7 @@ public class MenuResolutionScript : MonoBehaviour
     public GameObject MainMenuBackGround;
     public GameObject PlayBackground;
     public GameObject EndScreenBackground;
+    public GameObject Instructions;
     public GameObject LeftArrows;
     public GameObject RightArrows;
     public GameObject FoxesLeft;
@@ -28,6 +29,7 @@ public class MenuResolutionScript : MonoBehaviour
         {
             item.transform.localScale = new Vector3(x, y, z);
         }
+        ToResizeGameObjects[3].transform.localScale = new Vector3(x+0.07f, 1.41f, z);
     }
     void SetChickenBackgrounds(float x, float y, float z)
     {
@@ -37,7 +39,7 @@ public class MenuResolutionScript : MonoBehaviour
     void Start()
     {
         ToResizeGameObjects = new System.Collections.Generic.List<GameObject>();
-        ToResizeGameObjects.AddRange(new[] { MainMenuBackGround, PlayBackground, EndScreenBackground });
+        ToResizeGameObjects.AddRange(new[] { MainMenuBackGround, PlayBackground, EndScreenBackground, Instructions });
         MainCamera = GameObject.Find("Main Camera");
     }
     void SetSmallChickensPositions()
@@ -146,6 +148,7 @@ public class MenuResolutionScript : MonoBehaviour
             {
                 SetLocalScale(1.13f, 1.27f, 1f);
             }
+
             SetSmallChickensPositions();
         }
     }
