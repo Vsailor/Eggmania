@@ -4,6 +4,9 @@ using System.Collections;
 public class MenuResolutionScript : MonoBehaviour
 {
     public string SceneName = "MainMenu";
+    public GameObject QuitButtonPlayScene;
+    public GameObject ScoreDisplay;
+    public GameObject TimeDisplay;
     public GameObject LeftEggs;
     public GameObject RightEggs;
     public GameObject MainMenuBackGround;
@@ -67,6 +70,13 @@ public class MenuResolutionScript : MonoBehaviour
         LeftEggs.transform.position = new Vector3(left, LeftEggs.transform.position.y, LeftEggs.transform.position.z);
         RightEggs.transform.position = new Vector3(right, RightEggs.transform.position.y, RightEggs.transform.position.z);
     }
+
+    void SetUIPositions(float spaceFromCenter)
+    {
+        QuitButtonPlayScene.transform.position = new Vector3(PlayBackground.transform.position.x - spaceFromCenter, QuitButtonPlayScene.transform.position.y, QuitButtonPlayScene.transform.position.z);
+        ScoreDisplay.transform.position = new Vector3(PlayBackground.transform.position.x, ScoreDisplay.transform.position.y, ScoreDisplay.transform.position.z);
+        TimeDisplay.transform.position = new Vector3(PlayBackground.transform.position.x+spaceFromCenter, TimeDisplay.transform.position.y, TimeDisplay.transform.position.z);
+    }
     void OnGUI()
     {
         if (IsActive)
@@ -80,6 +90,7 @@ public class MenuResolutionScript : MonoBehaviour
             {
                 resolution = (Screen.width * 1.0 / Screen.height * 1.0).ToString();
             }
+            
 
             if (resolution == "1.70" || resolution == "1.7")
             {

@@ -16,6 +16,10 @@ public class ButtonScript : MonoBehaviour {
             //GameObject.Find("Grass").GetComponent<GrassScript>().IsActive = true;
             MainCamera.GetComponent<EggsScript>().IsActive = true;
         }
+        if (this.name == "Quit")
+        {
+            Application.Quit();
+        }
         if (this.name == "WriteAReviewButton")
         {
 

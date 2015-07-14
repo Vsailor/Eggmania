@@ -123,6 +123,8 @@ public class EggsScript : MonoBehaviour
                 {
                     Eggs[i].EggObject.GetComponent<SpriteRenderer>().enabled = false;
                     Eggs.RemoveAt(i);
+                    var score = GameObject.Find("ScoreAmount").GetComponent<TextMesh>();
+                    score.text = (int.Parse(score.text) + 1).ToString();
                     
                 }
 
