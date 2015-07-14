@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MenuResolutionScript : MonoBehaviour {
+public class MenuResolutionScript : MonoBehaviour
+{
     public string SceneName = "MainMenu";
+    public GameObject LeftEggs;
+    public GameObject RightEggs;
     public GameObject MainMenuBackGround;
     public GameObject PlayBackground;
     public GameObject Grass;
@@ -44,6 +47,12 @@ public class MenuResolutionScript : MonoBehaviour {
         }
 
     }
+
+    void SetEggsPositions(float left, float right)
+    {
+        LeftEggs.transform.position = new Vector3(left, LeftEggs.transform.position.y, LeftEggs.transform.position.z);
+        RightEggs.transform.position = new Vector3(right, RightEggs.transform.position.y, RightEggs.transform.position.z);
+    }
     void OnGUI()
     {
         if (IsActive)
@@ -61,6 +70,7 @@ public class MenuResolutionScript : MonoBehaviour {
             {
                 SetLocalScale(1.44f, 1.27f, 1f);
                 SetChickenBackgrounds(1.24f, 1f, 1f);
+                SetEggsPositions(2493.5f, 2496.2f);
             }
             else if (resolution == "1.78")
             {
@@ -71,21 +81,25 @@ public class MenuResolutionScript : MonoBehaviour {
             {
                 SetLocalScale(1.51f, 1.27f, 1f);
                 SetChickenBackgrounds(1.28f, 1f, 1f);
+                SetEggsPositions(2493.2f, 2496.5f);
             }
             else if (resolution == "1.66")
             {
                 SetLocalScale(1.41f, 1.27f, 1f);
                 SetChickenBackgrounds(1.21f, 1f, 1f);
+                SetEggsPositions(2493.7f, 2495.9f);
             }
             else if (resolution == "1.5" || resolution == "1.50")
             {
                 SetLocalScale(1.27f, 1.27f, 1f);
                 SetChickenBackgrounds(1.1f, 1f, 1f);
+                SetEggsPositions(2494.3f, 2495.4f);
             }
             else if (resolution == "1.60" || resolution == "1.6" || resolution == "1.59")
             {
                 SetLocalScale(1.36f, 1.27f, 1f);
                 SetChickenBackgrounds(1.17f, 1f, 1f);
+                SetEggsPositions(2493.9f, 2495.7f);
             }
             else if (resolution == "1.25")
             {
