@@ -46,9 +46,11 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\ArrowButtonScript.cs" />
      <Compile Include="Assets\ButtonScript.cs" />
      <Compile Include="Assets\ChickenScript.cs" />
      <Compile Include="Assets\EggsScript.cs" />
+     <Compile Include="Assets\FoxScript.cs" />
      <Compile Include="Assets\GrassScript.cs" />
      <Compile Include="Assets\MenuResolutionScript.cs" />
  <Reference Include="UnityEngine.UI">

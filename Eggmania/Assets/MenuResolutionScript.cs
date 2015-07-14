@@ -8,6 +8,10 @@ public class MenuResolutionScript : MonoBehaviour
     public GameObject RightEggs;
     public GameObject MainMenuBackGround;
     public GameObject PlayBackground;
+    public GameObject LeftArrows;
+    public GameObject RightArrows;
+    public GameObject FoxesLeft;
+    public GameObject FoxesRight;
     //public GameObject Grass;
     public GameObject Bg2;
     public GameObject Bg3;
@@ -47,7 +51,16 @@ public class MenuResolutionScript : MonoBehaviour
         }
 
     }
-    
+    void SetArrowsPositions(float left, float right)
+    {
+        LeftArrows.transform.position = new Vector3(left, LeftArrows.transform.position.y, LeftArrows.transform.position.z);
+        RightArrows.transform.position = new Vector3(right, RightArrows.transform.position.y, RightArrows.transform.position.z);
+    }
+    void SetFoxesPositions(float left, float right)
+    {
+        FoxesLeft.transform.position = new Vector3(left, FoxesLeft.transform.position.y, FoxesLeft.transform.position.z);
+        FoxesRight.transform.position = new Vector3(right, FoxesRight.transform.position.y, FoxesRight.transform.position.z);
+    }
 
     void SetEggsPositions(float left, float right)
     {
@@ -73,6 +86,8 @@ public class MenuResolutionScript : MonoBehaviour
                 SetLocalScale(1.44f, 1.27f, 1f);
                 SetChickenBackgrounds(1.24f, 1f, 1f);
                 SetEggsPositions(2493.5f, 2496.2f);
+                SetArrowsPositions(2498.4f, 2502.6f);
+                SetFoxesPositions(2499.47f, 2502.26f);
             }
             else if (resolution == "1.78")
             {
@@ -84,24 +99,32 @@ public class MenuResolutionScript : MonoBehaviour
                 SetLocalScale(1.51f, 1.27f, 1f);
                 SetChickenBackgrounds(1.28f, 1f, 1f);
                 SetEggsPositions(2493.2f, 2496.5f);
+                SetArrowsPositions(2498.01f, 2502.9f);
+                SetFoxesPositions(2499.21f, 2502.53f);
             }
             else if (resolution == "1.66")
             {
                 SetLocalScale(1.41f, 1.27f, 1f);
                 SetChickenBackgrounds(1.21f, 1f, 1f);
                 SetEggsPositions(2493.7f, 2495.9f);
+                SetArrowsPositions(2498.63f, 2502.25f);
+                SetFoxesPositions(2499.68f, 2501.9f);
             }
             else if (resolution == "1.5" || resolution == "1.50" || resolution == "1.49")
             {
                 SetLocalScale(1.27f, 1.27f, 1f);
                 SetChickenBackgrounds(1.1f, 1f, 1f);
                 SetEggsPositions(2494.3f, 2495.4f);
+                SetArrowsPositions(2499.5f, 2501.3f);
+                SetFoxesPositions(2500.28f, 2501.41f);
             }
             else if (resolution == "1.60" || resolution == "1.6" || resolution == "1.59")
             {
                 SetLocalScale(1.36f, 1.27f, 1f);
                 SetChickenBackgrounds(1.17f, 1f, 1f);
                 SetEggsPositions(2493.9f, 2495.7f);
+                SetArrowsPositions(2499f, 2501.93f);
+                SetFoxesPositions(2499.87f, 2501.73f);
             }
             else if (resolution == "1.25")
             {
