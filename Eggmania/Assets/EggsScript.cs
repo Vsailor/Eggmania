@@ -144,6 +144,29 @@ public class EggsScript : MonoBehaviour
         StartPlayingTime = Time.timeSinceLevelLoad;
         OldTime = StartPlayingTime;
     }
+    void SetTimer()
+    {
+        var timer = GameObject.Find("Timer").GetComponent<TextMesh>();
+        var secondsNow = (int)(Timer);
+        var minutes = secondsNow / 60;
+        if (minutes.ToString().Length == 1)
+        {
+            timer.text = "0" + minutes.ToString();
+        }
+        else
+        {
+            timer.text = minutes.ToString();
+        }
+        var seconds = secondsNow - minutes * 60;
+        if (seconds.ToString().Length == 1)
+        {
+            timer.text += ":0" + seconds.ToString();
+        }
+        else
+        {
+            timer.text += ":" + seconds.ToString();
+        }
+    }
     void Update()
     {
         if (IsActive)
@@ -155,6 +178,7 @@ public class EggsScript : MonoBehaviour
             }
 
             Timer = Time.timeSinceLevelLoad - StartPlayingTime;
+            SetTimer();
             if (Timer - OldTime > 1)
             {
                 MoveEgg();
