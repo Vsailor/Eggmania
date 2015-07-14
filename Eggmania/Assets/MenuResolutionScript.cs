@@ -8,7 +8,7 @@ public class MenuResolutionScript : MonoBehaviour
     public GameObject RightEggs;
     public GameObject MainMenuBackGround;
     public GameObject PlayBackground;
-    public GameObject Grass;
+    //public GameObject Grass;
     public GameObject Bg2;
     public GameObject Bg3;
     public bool IsActive = true;
@@ -29,10 +29,10 @@ public class MenuResolutionScript : MonoBehaviour
     void Start()
     {
         ToResizeGameObjects = new System.Collections.Generic.List<GameObject>();
-        ToResizeGameObjects.AddRange(new[] { MainMenuBackGround, PlayBackground, Grass });
+        ToResizeGameObjects.AddRange(new[] { MainMenuBackGround, PlayBackground });
         MainCamera = GameObject.Find("Main Camera");
     }
-    void SetChickensPositions()
+    void SetSmallChickensPositions()
     {
         var leftDownEggBrokenPos = GameObject.Find("LeftDownEggBroken").transform.position;
         var leftWidth = leftDownEggBrokenPos.x - Camera.main.ScreenToWorldPoint(this.transform.localScale).x;
@@ -47,6 +47,7 @@ public class MenuResolutionScript : MonoBehaviour
         }
 
     }
+    
 
     void SetEggsPositions(float left, float right)
     {
@@ -66,6 +67,7 @@ public class MenuResolutionScript : MonoBehaviour
             {
                 resolution = (Screen.width * 1.0 / Screen.height * 1.0).ToString();
             }
+
             if (resolution == "1.70" || resolution == "1.7")
             {
                 SetLocalScale(1.44f, 1.27f, 1f);
@@ -89,7 +91,7 @@ public class MenuResolutionScript : MonoBehaviour
                 SetChickenBackgrounds(1.21f, 1f, 1f);
                 SetEggsPositions(2493.7f, 2495.9f);
             }
-            else if (resolution == "1.5" || resolution == "1.50")
+            else if (resolution == "1.5" || resolution == "1.50" || resolution == "1.49")
             {
                 SetLocalScale(1.27f, 1.27f, 1f);
                 SetChickenBackgrounds(1.1f, 1f, 1f);
@@ -109,7 +111,7 @@ public class MenuResolutionScript : MonoBehaviour
             {
                 SetLocalScale(1.13f, 1.27f, 1f);
             }
-            SetChickensPositions();
+            SetSmallChickensPositions();
         }
     }
     void Update()

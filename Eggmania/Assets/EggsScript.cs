@@ -79,7 +79,7 @@ public class EggsScript : MonoBehaviour
     }
     void MoveEgg()
     {
-        if (Step%Rand.Next(1,10) == 0)
+        if (Step % Rand.Next(1, 10) == 0)
         {
             var rand = Rand.Next(1, 5);
             if (rand == 1)
@@ -110,7 +110,7 @@ public class EggsScript : MonoBehaviour
         {
             item.Move();
         }
-    
+
     }
     public int Step = 0;
     public float OldTime;
@@ -131,7 +131,7 @@ public class EggsScript : MonoBehaviour
                 Init();
                 Inited = true;
             }
-       
+
             Timer = Time.timeSinceLevelLoad - StartPlayingTime;
             if (Timer - OldTime > 1)
             {
