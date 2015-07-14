@@ -11,6 +11,7 @@ public class MenuResolutionScript : MonoBehaviour
     public GameObject RightEggs;
     public GameObject MainMenuBackGround;
     public GameObject PlayBackground;
+    public GameObject EndScreenBackground;
     public GameObject LeftArrows;
     public GameObject RightArrows;
     public GameObject FoxesLeft;
@@ -36,7 +37,7 @@ public class MenuResolutionScript : MonoBehaviour
     void Start()
     {
         ToResizeGameObjects = new System.Collections.Generic.List<GameObject>();
-        ToResizeGameObjects.AddRange(new[] { MainMenuBackGround, PlayBackground });
+        ToResizeGameObjects.AddRange(new[] { MainMenuBackGround, PlayBackground, EndScreenBackground });
         MainCamera = GameObject.Find("Main Camera");
     }
     void SetSmallChickensPositions()
@@ -148,11 +149,38 @@ public class MenuResolutionScript : MonoBehaviour
             SetSmallChickensPositions();
         }
     }
+    void ReadScores()
+    {
+        var score = System.IO.File.ReadAllText(Application.persistentDataPath + @"\Score");
+        GameObject.Find("YourScore").GetComponent<TextMesh>().text = "Your score: " + score;
+        if (System.IO.File.Exists(Application.persistentDataPath + @"\MaxScore"))
+        {
+            var maxScore = System.IO.File.ReadAllText(Application.persistentDataPath + @"\MaxScore");
+            if (int.Parse(maxScore) < int.Parse(score))
+            {
+                GameObject.Find("MaxScoreDisp").GetComponent<TextMesh>().text = "Highest score: " + score;
+                System.IO.File.WriteAllText(Application.persistentDataPath + @"\MaxScore", score.ToString());
+            }
+            else
+            {
+                GameObject.Find("MaxScoreDisp").GetComponent<TextMesh>().text = "Highest score: " + maxScore;
+            }
+        }
+        else
+        {
+            System.IO.File.WriteAllText(Application.persistentDataPath + @"\MaxScore", score.ToString());
+            GameObject.Find("MaxScoreDisp").GetComponent<TextMesh>().text = "Highest score: " + score;
+        }
+    }
     void Update()
     {
-        if (SceneName == "MainMenu")
+        if (SceneName == "MainMenu" || SceneName == "EndScreen")
         {
             MainCamera.GetComponent<Camera>().orthographicSize = 4.27f;
+            if (SceneName == "EndScreen")
+            {
+                ReadScores();
+            }
         }
         if (SceneName == "Play")
         {

@@ -3,7 +3,6 @@ using System.Collections;
 
 class Egg
 {
-
     public string Name;
     public int Number;
     public GameObject EggObject;
@@ -14,7 +13,26 @@ class Egg
         Number = 0;
         EggObject = GameObject.Find(name + Number);
     }
-    public void Move()
+    public void ChickenAnimation()
+    {
+        if (Name == "LeftDownEgg")
+        {
+            GameObject.Find("ChickenLeftDown").GetComponent<Animator>().Play("ChickenAnimation");
+        }
+        else if (Name == "RightDownEgg")
+        {
+            GameObject.Find("ChickenRightDown").GetComponent<Animator>().Play("ChickenAnimation");
+        }
+        else if (Name == "RightUpEgg")
+        {
+            GameObject.Find("ChickenRightUp").GetComponent<Animator>().Play("ChickenAnimation");
+        }
+        else if (Name == "LeftUpEgg")
+        {
+            GameObject.Find("ChickenLeftUp").GetComponent<Animator>().Play("ChickenAnimation");
+        }
+    }
+    public int Move()
     {
         if (Number != 0)
         {
@@ -25,7 +43,22 @@ class Egg
         {
             EggObject = GameObject.Find(Name + "Broken");
             EggObject.GetComponent<SpriteRenderer>().enabled = true;
-            return;
+            for (int i = 1; i <= 3; i++)
+            {
+                var obj = GameObject.Find("Health" + i);
+                if (!obj.GetComponent<SpriteRenderer>().enabled)
+                {
+                    obj.GetComponent<SpriteRenderer>().enabled = true;
+                    break;
+                }
+                if (i == 3)
+                {
+                    System.IO.File.WriteAllText(Application.persistentDataPath + @"\Score", GameObject.Find("ScoreAmount").GetComponent<TextMesh>().text);
+                    return -1;
+                }
+            }
+            ChickenAnimation();
+            return 1;
         }
         if (Number == 8 && (Name[0] == 'L' || Name[0] == 'R'))
         {
@@ -45,10 +78,11 @@ class Egg
         else if (Number >= 5 && (Name[0] == 'S'))
         {
             ToDestroy = true;
-            return;
+            return 1;
         }
         EggObject = GameObject.Find(Name + Number);
         EggObject.GetComponent<SpriteRenderer>().enabled = true;
+        return 1;
     }
 }
 
@@ -59,32 +93,20 @@ public class EggsScript : MonoBehaviour
     public GameObject UpLeftFox;
     public GameObject UpRightFox;
     public bool IsActive = false;
-    System.Collections.Generic.List<Egg> Eggs;
+    public int Step = 0;
+    public float OldTime;
+    public float Timer = 0;
+    public float StartPlayingTime;
+    private bool Inited = false;
+    private float Interval = 1.3f;
+    private int MaxEggsOnScreen = 3;
+    private System.Collections.Generic.List<Egg> Eggs;
     private System.Random Rand;
-    void Start()
-    {
-        Eggs = new System.Collections.Generic.List<Egg>();
-        for (int i = 1; i <= 6; i++)
-        {
-            GameObject.Find("LeftDownEgg" + i).GetComponent<SpriteRenderer>().enabled = false;
-            GameObject.Find("LeftUpEgg" + i).GetComponent<SpriteRenderer>().enabled = false;
-            GameObject.Find("RightDownEgg" + i).GetComponent<SpriteRenderer>().enabled = false;
-            GameObject.Find("RightUpEgg" + i).GetComponent<SpriteRenderer>().enabled = false;
-            if (i <= 4)
-            {
-                GameObject.Find("SmallChickenLeft" + i).GetComponent<SpriteRenderer>().enabled = false;
-                GameObject.Find("SmallChickenRight" + i).GetComponent<SpriteRenderer>().enabled = false;
-            }
-        }
-        GameObject.Find("LeftDownEggBroken").GetComponent<SpriteRenderer>().enabled = false;
-        GameObject.Find("RightDownEggBroken").GetComponent<SpriteRenderer>().enabled = false;
-        GameObject.Find("LeftUpEggBroken").GetComponent<SpriteRenderer>().enabled = false;
-        GameObject.Find("RightUpEggBroken").GetComponent<SpriteRenderer>().enabled = false;
-        Rand = new System.Random();
-    }
+    private GameObject ScoreAmount;
+
     void MoveEgg()
     {
-        if (Step % Rand.Next(1, 5) == 0 && Eggs.Count<5)
+        if (Step % Rand.Next(1, 5) == 0 && Eggs.Count<=MaxEggsOnScreen)
         {
             var rand = Rand.Next(1, 5);
             if (rand == 1)
@@ -123,26 +145,62 @@ public class EggsScript : MonoBehaviour
                 {
                     Eggs[i].EggObject.GetComponent<SpriteRenderer>().enabled = false;
                     Eggs.RemoveAt(i);
-                    var score = GameObject.Find("ScoreAmount").GetComponent<TextMesh>();
+                    var score = ScoreAmount.GetComponent<TextMesh>();
                     score.text = (int.Parse(score.text) + 1).ToString();
-                    
+                    if (int.Parse(score.text) % 10 == 0)
+                    {
+                        Interval *= 0.9f;
+                    }
                 }
 
             }
             if (i < Eggs.Count)
-            Eggs[i].Move();
+            {
+                if (Eggs[i].Move() == -1)
+                {
+                    this.IsActive = false;
+                    var MainCamera = GameObject.Find("Main Camera");
+                    MainCamera.transform.position = new Vector3(-2500f, MainCamera.transform.position.y, MainCamera.transform.position.z);
+                    MainCamera.GetComponent<MenuResolutionScript>().SceneName = "EndScreen";
+                    // End
+                }
+                
+            }
         }
 
     }
-    public int Step = 0;
-    public float OldTime;
-    public float Timer = 0;
-    public float StartPlayingTime;
-    private bool Inited = false;
+
     private void Init()
     {
+        if (Eggs != null)
+        {
+            foreach (var item in Eggs)
+            {
+                item.EggObject.GetComponent<SpriteRenderer>().enabled = false;
+            }
+        }
+        Eggs = new System.Collections.Generic.List<Egg>();
+        for (int i = 1; i <= 6; i++)
+        {
+            GameObject.Find("LeftDownEgg" + i).GetComponent<SpriteRenderer>().enabled = false;
+            GameObject.Find("LeftUpEgg" + i).GetComponent<SpriteRenderer>().enabled = false;
+            GameObject.Find("RightDownEgg" + i).GetComponent<SpriteRenderer>().enabled = false;
+            GameObject.Find("RightUpEgg" + i).GetComponent<SpriteRenderer>().enabled = false;
+            if (i <= 4)
+            {
+                GameObject.Find("SmallChickenLeft" + i).GetComponent<SpriteRenderer>().enabled = false;
+                GameObject.Find("SmallChickenRight" + i).GetComponent<SpriteRenderer>().enabled = false;
+            }
+        }
+        GameObject.Find("LeftDownEggBroken").GetComponent<SpriteRenderer>().enabled = false;
+        GameObject.Find("RightDownEggBroken").GetComponent<SpriteRenderer>().enabled = false;
+        GameObject.Find("LeftUpEggBroken").GetComponent<SpriteRenderer>().enabled = false;
+        GameObject.Find("RightUpEggBroken").GetComponent<SpriteRenderer>().enabled = false;
+        Rand = new System.Random();
         StartPlayingTime = Time.timeSinceLevelLoad;
-        OldTime = StartPlayingTime;
+        OldTime = 0;
+        ScoreAmount = GameObject.Find("ScoreAmount");
+        ScoreAmount.GetComponent<TextMesh>().text = "0";
     }
     void SetTimer()
     {
@@ -174,12 +232,13 @@ public class EggsScript : MonoBehaviour
             if (!Inited)
             {
                 Init();
+                Step = 0;
                 Inited = true;
             }
 
             Timer = Time.timeSinceLevelLoad - StartPlayingTime;
             SetTimer();
-            if (Timer - OldTime > 1)
+            if (Timer - OldTime > Interval)
             {
                 MoveEgg();
                 Step++;
