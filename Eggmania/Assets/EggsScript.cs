@@ -3,6 +3,7 @@ using System.Collections;
 
 class Egg
 {
+
     public string Name;
     public int Number;
     public GameObject EggObject;
@@ -53,6 +54,10 @@ class Egg
 
 public class EggsScript : MonoBehaviour
 {
+    public GameObject DownLeftFox;
+    public GameObject DownRightFox;
+    public GameObject UpLeftFox;
+    public GameObject UpRightFox;
     public bool IsActive = false;
     System.Collections.Generic.List<Egg> Eggs;
     private System.Random Rand;
@@ -79,7 +84,7 @@ public class EggsScript : MonoBehaviour
     }
     void MoveEgg()
     {
-        if (Step % Rand.Next(1, 10) == 0)
+        if (Step % Rand.Next(1, 5) == 0 && Eggs.Count<5)
         {
             var rand = Rand.Next(1, 5);
             if (rand == 1)
@@ -106,9 +111,24 @@ public class EggsScript : MonoBehaviour
                 Eggs.RemoveAt(i);
             }
         }
-        foreach (var item in Eggs)
-        {
-            item.Move();
+        
+        for (int i=0; i<Eggs.Count; i++)
+        { 
+            if (Eggs[i].Number == 5)
+            {
+                if ((Eggs[i].Name == "LeftDownEgg" && DownLeftFox.activeInHierarchy)
+                    || (Eggs[i].Name == "RightDownEgg" && DownRightFox.activeInHierarchy)
+                    || (Eggs[i].Name == "LeftUpEgg" && UpLeftFox.activeInHierarchy)
+                    || (Eggs[i].Name == "RightUpEgg" && UpRightFox.activeInHierarchy))
+                {
+                    Eggs[i].EggObject.GetComponent<SpriteRenderer>().enabled = false;
+                    Eggs.RemoveAt(i);
+                    
+                }
+
+            }
+            if (i < Eggs.Count)
+            Eggs[i].Move();
         }
 
     }
