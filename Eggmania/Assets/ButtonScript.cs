@@ -14,6 +14,7 @@ public class ButtonScript : MonoBehaviour {
             MainCamera.transform.position = new Vector3(2500, 0, -10f);
             MainCamera.GetComponent<MenuResolutionScript>().SceneName = "Play";
             GameObject.Find("Grass").GetComponent<GrassScript>().IsActive = true;
+            MainCamera.GetComponent<EggsScript>().IsActive = true;
         }
         if (this.name == "WriteAReviewButton")
         {
